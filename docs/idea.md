@@ -1,29 +1,47 @@
-# Idea: ASP (Automatic Speech‑to‑Text‑and‑Translate) Babylon Demo
+# Идея: Aetheris Semantic Protocol (ASP) — New Babylon
 
-**Goal**
+## Проблема
 
-Provide a self‑contained demonstration of the **ASP Babylon** concept: a system that can receive text (or speech) in any supported language, translate it instantly, and optionally feed the result into downstream services (e.g., text‑to‑speech). The demo showcases:
+Интернациональные команды (разработчики, исследователи, стартапы) сталкиваются с языковым барьером при коммуникации в реальном времени. Существующие переводчики:
 
-- A Rust library (`aetheris-lib`) that downloads MarianMT models and offers a simple `translate(text, target_lang)` API.
-- A lightweight HTTP server (Rust) exposing a `/translate` endpoint.
-- A matching Rust client that calls the server and prints the translation.
-- Language‑token configuration (`language_tokens.json`) enumerating supported languages.
-- Docker support for reproducible one‑click execution.
+- Передают **текст** (уязвим к перехвату, привязан к конкретному языку)
+- Работают через **облачные API** (задержка, зависимость от сервера)
+- Не обеспечивают **приватность** (данные проходят через третью сторону)
 
-**Why ASP?**
+## Решение
 
-- **Privacy‑first**: All translation happens locally, no third‑party API calls.
-- **Performance**: Low‑latency inference on commodity hardware.
-- **Extensibility**: The same pipeline can be extended to speech‑to‑text (STT) and text‑to‑speech (TTS) by swapping model blobs.
+**ASP (Aetheris Semantic Protocol)** — протокол, который передаёт по сети не текст, а **вектор смысла**.
 
-**Demo Flow**
+### Принцип работы
 
-1. Start the server: `cargo run --release` (listens on `127.0.0.1:8080`).
-2. Run the client: `cargo run --release --bin client -- "Hello world" ru`.
-3. The client prints the Russian translation.
+1. **Отправитель** вводит текст на **своём** языке
+2. **Encoder** (MarianMT) превращает текст в вектор скрытых состояний размером `[L × D]` — это «смысл» сообщения, не привязанный к конкретному языку
+3. **DESS** (Dynamic Embedding Space Shuffling) шифрует вектор с помощью ChaCha8 PRNG — перемешивает элементы так, что без ключа восстановить порядок невозможно
+4. Зашифрованный вектор упаковывается в **FlatBuffers** (`SemanticPacket`) — zero-copy, бинарный формат без overhead парсинга
+5. Пакет передаётся через **quiche** (QUIC over UDP) — низкая задержка, мультиплексирование, встроенный TLS 1.3
+6. **Получатель** дешифрует DESS → подаёт вектор в **Decoder** (MarianMT) с моделью **своего** языка → читает перевод
 
-**Future Work**
+### Ключевые свойства
 
-- Add STT/TTS micro‑services.
-- Expose a gRPC API.
-- Deploy to Kubernetes with auto‑scaling.
+| Свойство | Как достигается |
+|----------|----------------|
+| **Language-agnostic** | По сети передаётся вектор, а не текст. Получатель выбирает язык декодирования |
+| **Privacy** | DESS шифрует embedding — перехваченный пакет бесполезен без seed |
+| **Low latency** | QUIC (UDP), FlatBuffers (zero-copy), локальный инференс (Candle на CPU) |
+| **Offline-first** | Модели и инференс работают локально, сеть нужна только для передачи вектора |
+| **Extensible** | Добавление нового языка = скачивание одной модели (~300MB) |
+
+### Поддерживаемые языки
+
+English, Русский, Deutsch, Français, Español, 中文, العربية, Українська, 日本語, 한국어
+
+### Будущее
+
+- **STT/TTS интеграция** — голос → вектор → голос
+- **Streaming** — посимвольный/потоковый перевод через QUIC streams
+- **Edge deployment** — запуск на мобильных устройствах и IoT
+- **Multi-party** — групповые чаты с автоматическим декодированием на язык каждого участника
+
+---
+
+> **New Babylon** — потому что в Вавилоне люди перестали понимать друг друга. Мы это исправим.

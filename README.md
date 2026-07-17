@@ -1,69 +1,147 @@
-# ASP Babylon Demo
+# 🏛️ New Babylon — Semantic Protocol (ASP)
 
-## Overview
-This repository showcases the **ASP (Babylon) protocol** for instant, high‑quality multi‑language translation. The demo includes:
-- A Rust library (`aetheris-lib`) that downloads MarianMT models and provides a simple translation API.
-- Python scripts that use the library via the generated bindings.
-- A **console benchmark** that measures translation latency for a set of target languages.
-- Docker support for one‑click execution.
+**Aetheris Semantic Protocol** — протокол передачи смысла для интернациональных команд.
 
-## Features
-- **Real‑time translation** performed locally without calling external APIs.
-- **Error reduction** thanks to a unified tokenizer and model set.
-- **Barrier removal** – users can communicate in their native language while messages are automatically translated.
-- **Future‑ready** – binary blobs are already supported, making STT/TTS integration straightforward.
+Отправитель кодирует текст в **вектор скрытых состояний** (encoder MarianMT), шифрует его через **DESS** (Dynamic Embedding Space Shuffling), передаёт по сети через **quiche** (QUIC / UDP) в формате **FlatBuffers** (`SemanticPacket`). Получатель дешифрует вектор и декодирует его на **свой язык** (decoder MarianMT).
 
-## Quick‑Start
+> Не текст передаётся по сети — передаётся **смысл**.
+
+## Архитектура
+
+```
+ Клиент (Отправитель)                         Сервер (Получатель)
+┌────────────────────┐                    ┌────────────────────┐
+│  Текст (en)        │                    │  Получен SemanticPkt│
+│        ↓           │                    │        ↓           │
+│  MarianMT Encoder  │                    │  DESS Unshuffle    │
+│        ↓           │                    │        ↓           │
+│  DESS Shuffle      │   ── QUIC/UDP ──▸  │  MarianMT Decoder  │
+│        ↓           │   FlatBuffers      │        ↓           │
+│  SemanticPacket    │                    │  Текст (ru/de/…)   │
+└────────────────────┘                    └────────────────────┘
+```
+
+## Стек
+
+| Слой | Технология | Назначение |
+|------|-----------|------------|
+| AI Engine | **Candle** (candle-core, candle-transformers, candle-nn) | Инференс MarianMT на CPU |
+| Модели | **Helsinki-NLP/opus-mt** (MarianMT Seq2Seq) | Кодирование / декодирование смысла |
+| Сериализация | **FlatBuffers** | Zero-copy формат для SemanticPacket |
+| Транспорт | **quiche** (QUIC over UDP, HTTP/3) | Быстрая доставка пакетов |
+| Шифрование | **DESS** (ChaCha8 + vector shuffle) | Обфускация вектора |
+| Токенизация | **tokenizers** (HuggingFace) | BPE-токенизация текста |
+
+## Quick Start
+
 ```bash
-# Clone the repository
-git clone https://github.com/your-org/asp-babylon-demo.git
-cd asp-babylon-demo
+# 1. Клонируем
+git clone --recursive https://github.com/librioom2/newbabylon-asp.git
+cd newbabylon-asp/aetheris-protocol
 
-# Install Rust toolchain (required for aetheris-lib)
-rustup toolchain install stable
-
-# Build the Rust library
+# 2. Собираем
 cargo build --release
 
-# Install Python dependencies
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+# 3. Скачиваем модели (en-ru, ru-en, en-de, en-fr, en-es, en-zh, en-ar, en-uk, en-ja, en-ko)
+cargo run --release -p babylon -- init
 
-# Download all models (includes en, ru, de, fr, es, zh, ar, uk, ja, ko)
-python -c "from aetheris_lib import Downloader; Downloader.fetch_all()"
-
-# Run a simple translation (English → Russian)
-python -c "from aetheris_lib import translate; print(translate('The quick brown fox jumps over the lazy dog.', 'ru'))"
+# 4. Локальный тест перевода
+cargo run --release -p babylon -- translate "Hello world" --direction en-ru
 ```
 
-## Benchmark
-Run the benchmark script to see average latency per language:
+## Сетевой режим (server / client)
+
+### Терминал 1 — Сервер (получатель)
 ```bash
-python benchmarks/translate_benchmark.py
+cargo run --release -p babylon -- listen --addr 127.0.0.1:4433
 ```
-The script prints a markdown table like:
-```
-| Language | Avg latency (ms) |
-|----------|------------------|
-| ru       | 45.2 |
-| de       | 48.6 |
-| ...      | ... |
-```
-The benchmark can also be executed inside the provided Docker container:
+
+### Терминал 2 — Клиент (отправитель)
 ```bash
-docker build -t asp-benchmark -f Dockerfile .
-docker run --rm asp-benchmark
+cargo run --release -p babylon -- connect \
+  --addr 127.0.0.1:4433 \
+  --text "The quick brown fox jumps over the lazy dog" \
+  --lang ru \
+  --seed 1337
+```
+
+Клиент кодирует текст → шифрует DESS → упаковывает в FlatBuffers SemanticPacket → отправляет через UDP.
+Сервер принимает → дешифрует DESS → декодирует MarianMT → выводит перевод.
+
+## Поддерживаемые языки
+
+| Код | Язык |
+|-----|------|
+| `en` | English |
+| `ru` | Русский |
+| `de` | Deutsch |
+| `fr` | Français |
+| `es` | Español |
+| `zh` | 中文 |
+| `ar` | العربية |
+| `uk` | Українська |
+| `ja` | 日本語 |
+| `ko` | 한국어 |
+
+## FlatBuffers Schema (SemanticPacket)
+
+```fbs
+namespace Babylon;
+
+enum Precision : byte { F32 = 0, F16 = 1, INT8 = 2 }
+
+table SemanticPacket {
+  session_id: ulong;
+  sequence_id: uint;
+  ghost_hash: ulong;           // DESS seed
+  precision: Precision;
+  sequence_length: uint;        // L
+  hidden_dimension: uint;       // D
+  embedding_data: [ubyte];      // L * D * sizeof(precision)
+  language_hint: string;        // Target language (ru, en, ja…)
+  timestamp: ulong;
+}
+```
+
+## Структура проекта
+
+```
+NewBabylon/
+├── aetheris-protocol/          # ⚙️ Основной Rust workspace (submodule)
+│   ├── aetheris-lib/           # Core library
+│   │   ├── src/
+│   │   │   ├── ai/mod.rs       # SemanticEngine, DecoderEngine, DESS
+│   │   │   ├── transport/mod.rs# QuicheNode (QUIC / UDP)
+│   │   │   ├── proto/          # FlatBuffers schema + generated code
+│   │   │   ├── models.rs       # Downloader (HuggingFace models)
+│   │   │   └── lib.rs
+│   │   └── build.rs            # Quiche / BoringSSL build
+│   ├── babylon-cli/            # CLI: init, translate, listen, connect
+│   ├── models/                 # Downloaded model weights (gitignored)
+│   └── Cargo.toml              # Workspace config
+├── docs/
+│   └── idea.md                 # Concept document
+├── certs/                      # TLS certificates for quiche
+│   └── generate.sh
+└── README.md
+```
+
+## TLS-сертификаты (для quiche)
+
+```bash
+cd certs && bash generate.sh
 ```
 
 ## Sponsorship
+
 We are looking for sponsors to support the continuation of this project (hosting, model storage, future STT/TTS integration). Please see the **One‑Pager** in the `docs/` folder for details.
 
 - **GitHub Sponsors:** https://github.com/sponsors/your-org
 - **Open Collective:** https://opencollective.com/your-org
 
 ---
+
 ## License
 - Core library (`aetheris-lib`): Apache‑2.0
-- Demo scripts and benchmark: MIT
+- CLI and demo scripts: MIT
 - Documentation and presentation assets: CC‑BY‑4.0
