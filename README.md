@@ -50,42 +50,37 @@ graph TD
 ```
 
 ---
-## 📊 Benchmarks & Performance
+## 📊 Benchmarks & Performance Verification
 
 ### Environment Configuration
-* **Date:** July 18, 2026
-* **Platform:** macOS (Apple Silicon), **CPU-only inference**
-* **Engine:** Candle (`candle-core` v0.8) + MarianMT (`Helsinki-NLP/opus-mt`)
-* **Weight Format:** `SafeTensors`
+* **Execution Engine:** `Candle` (`candle-core` v0.8) + MarianMT (`Helsinki-NLP/opus-mt`)
+* **Hardware Profile:** macOS (Apple Silicon), **100% CPU-only execution**
+* **Dataset:** `phrases_100.json` (100 production-grade multi-domain phrases)
+* **Telemetry Output:** Logged directly into `translations_output.json`
 
-### Batch Translation Metrics (100 Phrases × 6 Languages)
+### Multi-Language Load Metrics
 
-| Language | Code | Model Size | Model Load | 100 Phrases | Avg / Phrase | Errors |
+| Target Language | Code | Model Size | Load Latency | 100 Phrases | Net Avg / Phrase | Errors |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| 🇷🇺 Russian | `ru` | 537 MB | 1.14s | 17.87s | ~179ms | 0 |
-| 🇩🇪 German | `de` | 511 MB | 1.99s | 16.52s | ~165ms | 0 |
-| 🇫🇷 French | `fr` | 519 MB | 2.24s | 18.14s | ~181ms | 0 |
-| 🇪🇸 Spanish | `es` | 552 MB | 2.65s | 17.32s | ~173ms | 0 |
-| 🇨🇳 Chinese | `zh` | 552 MB | 2.27s | 16.20s | ~162ms | 0 |
-| 🇸🇦 Arabic | `ar` | 539 MB | 2.23s | 18.95s | ~190ms | 0 |
+| 🇷🇺 Russian | `ru` | 537 MB | 2.05s | 17.33s | ~173ms | 0 |
+| 🇩🇪 German | `de` | 511 MB | 1.92s | 15.71s | ~157ms | 0 |
+| 🇫🇷 French | `fr` | 519 MB | 2.10s | 17.63s | ~176ms | 0 |
+| 🇪🇸 Spanish | `es` | 552 MB | 2.40s | 17.09s | ~170ms | 0 |
+| 🇨🇳 Chinese | `zh` | 552 MB | 2.37s | 15.49s | ~154ms | 0 |
+| 🇸🇦 Arabic | `ar` | 539 MB | 2.26s | 18.66s | ~186ms | 0 |
 
----
-### Aggregated Performance Summary
+### Aggregated Telemetry Summary
+* **Total Automated Translations:** 600 pipelines executed (100 phrases × 6 languages).
+* **Gross Runtime (with cold-start model loads):** **116.71s**
+* **Net Translation Execution Time:** 101.91s
+* **Global System Throughput:** **~5.88 translations / second**
+* **Process Integrity:** 100% Stability (0 runtime panic crashes, 0 pipeline errors).
 
-| Metric | Benchmark Value |
-| :--- | :--- |
-| **Total Translations** | 600 |
-| **Total Runtime (incl. model loading)** | 121.3s |
-| **Pure Translation Time (excl. loading)** | 104.8s |
-| **Average Translation Latency** | **~175ms per phrase** |
-| **System Throughput** | **~5.7 translations / sec** |
-| **Success Rate** | 100% (0 Errors) |
+### 🚨 Current Model Constraints & Validation Notes
 
-### Translation Quality & Validation
-
-* 🔥 **Exceptional Quality:** `ru` (Russian), `de` (German), `fr` (French), `es` (Spanish) — outputs are highly accurate, context-aware, and linguistically natural.
-* ⚡ **Good Quality:** `zh` (Chinese) — grammatically precise and correct, though minor stylistic nuances may occasionally be flattened.
-* ⚠️ **Needs Refinement:** `ar` (Arabic) — selected phrases can be truncated or structurally inaccurate. The underlying `opus-mt-en-ar` baseline model currently exhibits weaker semantic coherence compared to European language pairs.
+* 🔥 **Production-Ready:** `ru`, `de`, `fr`, `es`. Highly deterministic, context-aware syntax reconstruction.
+* ⚠️ **Linguistic Token Duplication (`zh`):** The Chinese pipeline exhibits intermittent token stuttering (e.g., repeating sub-tokens like `卡` or phrases `你好`). This is a known tokenizer padding issue under current `Candle` execution loops and is being patched via generation penalties.
+* ❌ **Semantic Degradation (`ar`):** The baseline `opus-mt-en-ar` model shows severe degradation on complex syntax. It suffers from heavy token repetition (*"مثل مثل مثل"*) and context drifting (interpreting *"moon"* as *"treasure / الكنز"*). Replacing the Arabic edge-weights file is scheduled for the next release.
 
 ---
 ## 🛠 Technology Stack
