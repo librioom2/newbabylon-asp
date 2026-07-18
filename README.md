@@ -1,4 +1,4 @@
-# 🏛️ New Babylon — Semantic Protocol (ASP)
+# 🏛️ New Babylon — Aetheris Semantic Protocol (ASP)
 
 **Aetheris Semantic Protocol** — протокол передачи смысла для интернациональных команд.
 
