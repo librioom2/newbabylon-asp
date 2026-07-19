@@ -1,0 +1,3 @@
+[submodule "deps/quiche"]
+	path = aetheris-lib/deps/quiche
+	url = https://github.com/cloudflare/quiche.git

@@ -1,0 +1,23 @@
+namespace Babylon;
+
+enum Precision : byte { F32 = 0, F16 = 1, INT8 = 2 }
+
+table SemanticPacket {
+  session_id: ulong;
+  sequence_id: uint;
+  ghost_hash: ulong;          // Хеш для синхронизации "Ключа-призрака" (DESS)
+  precision: Precision;
+  
+  sequence_length: uint;      // Длина последовательности (L)
+  hidden_dimension: uint;     // Размерность скрытого вектора (D)
+  
+  // Вектор передаем как массив байтов (ubyte) 
+  // Это плоский массив размером L * D * sizeof(precision)
+  embedding_data: [ubyte];    
+  
+  language_hint: string;      // На какой язык декодировать (ru, en, ja)
+  timestamp: ulong;
+}
+
+root_type SemanticPacket;
+

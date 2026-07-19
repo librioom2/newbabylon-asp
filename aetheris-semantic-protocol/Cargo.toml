@@ -1,0 +1,14 @@
+[workspace]
+members = [
+    "aetheris-lib",
+    "babylon-cli"
+]
+resolver = "2"
+
+[profile.release]
+opt-level = 3
+lto = false          # Отключено для предотвращения сбоев LLVM/линкера на macOS
+codegen-units = 1    # Максимальная локальная оптимизация и инлининг функций
+panic = "abort"      # Исключает оверхед на раскрутку стека при ошибках
+strip = true         # Вырезает все дебаг-символы и таблицы (сильнее уменьшает бинарник, чем "symbols")
+

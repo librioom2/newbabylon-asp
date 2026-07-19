@@ -1,0 +1,16 @@
+[package]
+name = "babylon"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aetheris-lib = { path = "../aetheris-lib" }
+ratatui = "0.26"
+crossterm = "0.27"
+tokio = { version = "1", features = ["full"] }
+clap = { version = "4", features = ["derive"] } # Парсинг аргументов командной строки
+anyhow = "1.0.102"
+fxhash = "0.2.1"
+flatbuffers = "24.3.25"
+
+

@@ -1,0 +1,902 @@
+[
+  {
+    "en": "Hello, how are you?",
+    "fr": "Bonjour, comment allez-vous ?",
+    "ar": "مرحباً، كيف حالك؟",
+    "zh": "你好,你好吗?",
+    "es": "Hola, ¿cómo estás?",
+    "de": "Hallo, wie geht's?",
+    "ru": "Привет, как дела?"
+  },
+  {
+    "de": "Guten Morgen!",
+    "fr": "Bonjour !",
+    "zh": "早上好! 早上好! 早上好! 早上好! 早上好!",
+    "ar": "! صباح الخير صباح الخير",
+    "ru": "Доброе утро!",
+    "es": "¡Buenos días!",
+    "en": "Good morning!"
+  },
+  {
+    "fr": "Merci beaucoup.",
+    "es": "Muchas gracias.",
+    "en": "Thank you very much.",
+    "de": "Vielen Dank.",
+    "ru": "Большое спасибо.",
+    "zh": "非常感谢你",
+    "ar": "شكراً جزيلاً لكِ"
+  },
+  {
+    "zh": "你叫什么名字? 名字吗?",
+    "ar": "ما هو اسمك؟",
+    "de": "Wie heißt du?",
+    "fr": "Quel est votre nom ?",
+    "en": "What is your name?",
+    "ru": "Как тебя зовут?",
+    "es": "¿Cuál es tu nombre?"
+  },
+  {
+    "de": "Schön, Sie kennenzulernen.",
+    "es": "Encantado de conocerle.",
+    "zh": "很高兴认识你",
+    "ru": "Приятно познакомиться.",
+    "ar": "لتقابلك في وقت مناسب",
+    "en": "Nice to meet you.",
+    "fr": "Ravi de vous rencontrer."
+  },
+  {
+    "de": "Ich verstehe nicht.",
+    "es": "No lo entiendo.",
+    "en": "I don't understand.",
+    "zh": "我听不懂你说什么",
+    "ar": "أنا لا أفهم",
+    "ru": "Я не понимаю.",
+    "fr": "Je ne comprends pas."
+  },
+  {
+    "es": "Por favor, ayúdame.",
+    "en": "Please help me.",
+    "de": "Bitte helfen Sie mir.",
+    "fr": "S'il vous plaît, aidez-moi.",
+    "zh": "帮我一下吧",
+    "ar": "من فضلكِ لي أن أساعدكِ",
+    "ru": "Пожалуйста, помогите мне."
+  },
+  {
+    "de": "Wo ist das nächste Krankenhaus?",
+    "zh": "最近的医院在哪里?",
+    "fr": "Où est l'hôpital le plus proche ?",
+    "en": "Where is the nearest hospital?",
+    "ar": "أين هو المكان الذي يوجد فيه المستشفى؟",
+    "ru": "Где ближайший госпиталь?",
+    "es": "¿Dónde está el hospital más cercano?"
+  },
+  {
+    "zh": "多少钱?",
+    "en": "How much does it cost?",
+    "ar": "كيف يكلف كل هذا؟",
+    "es": "¿Cómo te cuesta?",
+    "ru": "Как это дорого стоит?",
+    "fr": "Ça coûte combien ?",
+    "de": "Wie viel kostet es?"
+  },
+  {
+    "zh": "我愿意点菜",
+    "en": "I would like to order food.",
+    "es": "Me gustaría pedir comida.",
+    "fr": "Je voudrais commander à manger.",
+    "de": "Ich möchte Essen bestellen.",
+    "ar": "أنا مثل مثل طلب الطعام.",
+    "ru": "Я бы хотел заказать еду."
+  },
+  {
+    "ru": "Вы можете говорить по-английски?",
+    "fr": "Vous pouvez parler anglais ?",
+    "es": "¿Puedes hablar inglés?",
+    "zh": "你能说英语吗?",
+    "en": "Can you speak English?",
+    "ar": "هل يمكنك التحدث بالإنجليزية؟",
+    "de": "Können Sie Englisch sprechen?"
+  },
+  {
+    "ru": "Какое время?",
+    "es": "¿Cuánto tiempo es?",
+    "ar": "ما هو الوقت الذي هو عليه؟",
+    "en": "What time is it?",
+    "de": "Was ist Zeit?",
+    "zh": "时间是多少?",
+    "fr": "Quel temps est-ce ?"
+  },
+  {
+    "es": "Necesito un taxi.",
+    "en": "I need a taxi.",
+    "de": "Ich brauche ein Taxi.",
+    "ru": "Мне нужно такси.",
+    "zh": "我需要一辆出租车",
+    "fr": "J'ai besoin d'un taxi.",
+    "ar": "أنا بحاجة إلى سيارة أجرة."
+  },
+  {
+    "en": "The weather is beautiful today.",
+    "fr": "Le temps est beau aujourd'hui.",
+    "ar": "الطقس هو اليوم.",
+    "zh": "今天天气真好看",
+    "de": "Das Wetter ist heute schön.",
+    "es": "El tiempo es hermoso hoy.",
+    "ru": "Сегодня красивая погода."
+  },
+  {
+    "es": "Estoy buscando un hotel.",
+    "zh": "我看起来像酒店",
+    "en": "I am looking for a hotel.",
+    "ru": "Я ищу отель.",
+    "de": "Ich suche ein Hotel.",
+    "fr": "Je suis en train de chercher un hôtel.",
+    "ar": "أنا أَحْبُّ a فندق."
+  },
+  {
+    "fr": "Je peux avoir la facture, s'il vous plaît ?",
+    "en": "Can I have the bill, please?",
+    "ar": "هل يمكنني الحصول على الفاتورة؟",
+    "zh": "我能有账单吗?",
+    "es": "¿Puedo tener la cuenta, por favor?",
+    "ru": "Могу я получить счет, пожалуйста?",
+    "de": "Kann ich bitte die Rechnung haben?"
+  },
+  {
+    "en": "I am lost. Can you help me?",
+    "fr": "Je suis perdu.",
+    "es": "¿Me estás ayudando?",
+    "ar": "أنا فقدتك.",
+    "zh": "我迷失了,你能帮我吗?",
+    "ru": "Я могу помочь тебе.",
+    "de": "Ich habe verloren. Kann ich dir helfen?"
+  },
+  {
+    "fr": "Où est la gare ?",
+    "es": "¿Dónde está el tren?",
+    "en": "Where is the train station?",
+    "de": "Wo ist der Bahnhof?",
+    "ru": "Где поезд?",
+    "zh": "火车站在哪?",
+    "ar": "أين هو المكان الذي يُقام فيه القطار؟"
+  },
+  {
+    "en": "I have a reservation.",
+    "es": "Tengo una reservación.",
+    "zh": "我订了个预订",
+    "ru": "Я забронировал столик.",
+    "fr": "J'ai une réservation.",
+    "de": "Ich habe eine Reservierung.",
+    "ar": "لدي حجز."
+  },
+  {
+    "zh": "你接受信用卡卡吗?",
+    "en": "Do you accept credit cards?",
+    "de": "Akzeptieren Sie Kreditkarten?",
+    "es": "¿Aceptas tarjetas de crédito?",
+    "ar": "هل تقبل ببطاقات الائتمان؟",
+    "ru": "Вы принимаете кредитные карты?",
+    "fr": "Vous acceptez les cartes de crédit ?"
+  },
+  {
+    "de": "Ich bin allergisch, um verrückt zu sein.",
+    "ar": "أنا أُريدُ أن أُصبحَ مُؤَسَّخَاً.",
+    "fr": "Je suis allergique aux noix.",
+    "zh": "我过敏的坚果。",
+    "ru": "Я вся в орехах.",
+    "en": "I am allergic to nuts.",
+    "es": "Estoy alérgico a las nueces."
+  },
+  {
+    "ru": "Пожалуйста, вызовите полицию.",
+    "en": "Please call the police.",
+    "de": "Bitte rufen Sie die Polizei an.",
+    "fr": "S'il vous plaît, appelez la police.",
+    "es": "Por favor, llama a la policía.",
+    "zh": "请叫警察来",
+    "ar": "من فضلك طلب الشرطة"
+  },
+  {
+    "ar": "أحتاج إلى رؤية طبيب",
+    "fr": "J'ai besoin de voir un docteur.",
+    "de": "Ich brauche einen Arzt.",
+    "en": "I need to see a doctor.",
+    "ru": "Мне нужен доктор.",
+    "es": "Necesito ver un doctor.",
+    "zh": "我要找医生"
+  },
+  {
+    "es": "¿Qué es la contraseña de Wi-Fi?",
+    "de": "Was ist das Passwort?",
+    "zh": "Wi密码是什么?",
+    "fr": "Quel est le mot de passe Wi-Fi ?",
+    "ar": "ما هو ما هو عليه - - ما هو؟",
+    "en": "What is the Wi-Fi password?",
+    "ru": "Какой пароль у Ви?"
+  },
+  {
+    "zh": "我能拿杯水吗?",
+    "de": "Kann ich ein Glas Wasser bekommen?",
+    "fr": "Je peux avoir un verre d'eau ?",
+    "es": "¿Puedo conseguir un vaso de agua?",
+    "en": "Can I get a glass of water?",
+    "ru": "Могу я получить стакан воды?",
+    "ar": "هل يمكنني الحصول على ماء؟"
+  },
+  {
+    "en": "The food was delicious.",
+    "fr": "La nourriture était délicieuse.",
+    "zh": "食物是美味的。",
+    "ar": "الطعام كان هو الذي كان يُطعم الطعام",
+    "es": "La comida era deliciosa.",
+    "de": "Das Essen war köstlich.",
+    "ru": "Еда была вкусной."
+  },
+  {
+    "ru": "Я путешествую с семьей.",
+    "es": "Estoy viajando con mi familia.",
+    "en": "I am traveling with my family.",
+    "de": "Ich bin mit meiner Familie unterwegs.",
+    "ar": "أنا أسافر مع عائلتي",
+    "zh": "我旅行的是我的家人。",
+    "fr": "Je voyage avec ma famille."
+  },
+  {
+    "ar": "أين يمكنني شراء التذاكر؟",
+    "de": "Wo kann ich Tickets kaufen?",
+    "ru": "Где я могу купить билеты?",
+    "es": "¿Dónde puedo comprar boletos?",
+    "zh": "我可以买票吗?",
+    "en": "Where can I buy tickets?",
+    "fr": "Où puis-je acheter des billets ?"
+  },
+  {
+    "en": "Is there a pharmacy nearby?",
+    "de": "Ich habe eine Apotheke in der Nähe?",
+    "zh": "附近有药店吗?",
+    "fr": "Je suis dans la pharmacie ?",
+    "ru": "А рядом аптека?",
+    "es": "¿Hay una farmacia cerca?",
+    "ar": "هل هناك مكان آخر؟"
+  },
+  {
+    "zh": "我愿意租车",
+    "en": "I would like to rent a car.",
+    "ru": "Я бы хотел взять машину в аренду.",
+    "ar": "أنا مثل مثل مثل أيجار.",
+    "fr": "Je voudrais louer une voiture.",
+    "es": "Me gustaría alquilar un coche.",
+    "de": "Ich würde gerne ein Auto mieten."
+  },
+  {
+    "zh": "开会开始在九点。",
+    "ru": "Встреча с девятью.",
+    "de": "Das Treffen beginnt bei neun.",
+    "ar": "-المقابلة تبدأ في تسعة",
+    "es": "El encuentro empieza en el nueve.",
+    "en": "The meeting starts at nine.",
+    "fr": "Le rendez-vous commence à neuf."
+  },
+  {
+    "en": "Please send me the report.",
+    "de": "Bitte schicken Sie mir den Bericht.",
+    "fr": "S'il vous plaît, envoyez-moi le rapport.",
+    "ar": "من فضلك أرسل لي التقرير",
+    "es": "Por favor, envíame el informe.",
+    "zh": "请给我寄报告",
+    "ru": "Пожалуйста, отправьте мне отчет."
+  },
+  {
+    "de": "Wir brauchen das Projekt.",
+    "zh": "我们需要讨论一下项目",
+    "ar": "نحن بحاجة إلى مشروع المشروع.",
+    "ru": "Нам нужно обсудить проект.",
+    "fr": "On a besoin de parler du projet.",
+    "es": "Necesitamos discutir el proyecto.",
+    "en": "We need to discuss the project."
+  },
+  {
+    "es": "El próximo viernes es el plazo.",
+    "zh": "下个最后期限是星期五",
+    "en": "The deadline is next Friday.",
+    "de": "Die Deadline ist der nächste Freitag.",
+    "ar": "-الموعد النهائي هو يوم الجمعة القادم",
+    "ru": "В следующий раз.",
+    "fr": "La date limite est vendredi prochain."
+  },
+  {
+    "fr": "Tu peux revoir ce document ?",
+    "ru": "Вы можете пересмотреть этот документ?",
+    "ar": "هل يمكنك مراجعة هذا المستند؟",
+    "es": "¿Puedes revisar este documento?",
+    "en": "Can you review this document?",
+    "de": "Können Sie das Dokument überprüfen?",
+    "zh": "你能审查一下这个文件吗?"
+  },
+  {
+    "ru": "Я согласен с твоим предложением.",
+    "de": "Ich stimme mit Ihrem Vorschlag überein.",
+    "es": "Estoy de acuerdo con tu propuesta.",
+    "fr": "Je suis d'accord avec votre proposition.",
+    "zh": "我同意你的求婚",
+    "en": "I agree with your proposal.",
+    "ar": "أنا أوافقك على اقتراحك"
+  },
+  {
+    "en": "Let's schedule a conference call.",
+    "fr": "Laissez-moi vous appeler pour une conférence.",
+    "es": "Deja que te llamen.",
+    "de": "Lassen Sie uns einen Termin vereinbaren.",
+    "ru": "Дай мне время на конференцию.",
+    "zh": "安排会议时间",
+    "ar": "-يسمح لي باجتماع مؤتمري"
+  },
+  {
+    "zh": "预算是批准",
+    "ar": "الميزانية كانت موافق عليها",
+    "en": "The budget has been approved.",
+    "es": "El presupuesto ha sido aprobado.",
+    "fr": "Le budget a été approuvé.",
+    "de": "Das Budget hat genehmigt.",
+    "ru": "Бюджет был утвержден."
+  },
+  {
+    "de": "Wir sind vor uns.",
+    "en": "We are ahead of schedule.",
+    "ru": "Мы вперёд в расписании.",
+    "zh": "我们提前了时间表",
+    "fr": "On est devant le programme.",
+    "es": "Estamos por delante de la agenda.",
+    "ar": "نحن في المقدمة من جدول الأعمال."
+  },
+  {
+    "zh": "客户很满意",
+    "de": "Der Kunde ist sehr zufrieden.",
+    "ru": "Клиент очень удовлетворен.",
+    "en": "The client is very satisfied.",
+    "es": "El cliente está muy satisfecho.",
+    "ar": "-العميل هو الذي يُقنع",
+    "fr": "Le client est très satisfait."
+  },
+  {
+    "en": "I love learning new languages.",
+    "zh": "我很喜欢学习新语言",
+    "ru": "Я люблю изучать новые языки.",
+    "de": "Ich liebe es, neue Sprachen zu lernen.",
+    "es": "Me encanta aprender idiomas nuevos.",
+    "ar": "أنا أحب أن أدرس لغة جديدة",
+    "fr": "J'adore apprendre les langues."
+  },
+  {
+    "es": "La música trae a la gente juntos.",
+    "zh": "音乐带来人们在一起。",
+    "ru": "Музыка приносит вместе.",
+    "en": "Music brings people together.",
+    "fr": "La musique apporte les gens ensemble.",
+    "de": "Musik bringt Leute zusammen.",
+    "ar": "-أُحضر الناس إلى هنا"
+  },
+  {
+    "ru": "Читать твои мысли.",
+    "fr": "Je vais vous donner un peu d'esprit.",
+    "en": "Reading expands your mind.",
+    "ar": "-أُسس عليكِ نصّف نصكِ .",
+    "zh": "读取你的心思。",
+    "es": "Leo tu mente.",
+    "de": "Lesen Sie Ihre Gedanken erweitern."
+  },
+  {
+    "en": "Travel is the best education.",
+    "es": "Viajar es lo mejor para la educación.",
+    "de": "Reisen ist die beste Ausbildung.",
+    "zh": "旅行是最好的教育。",
+    "ar": "السفر هو أفضل تعليم.",
+    "ru": "Путешествие - лучшее образование.",
+    "fr": "Voyagez, c'est l'éducation la plus efficace."
+  },
+  {
+    "de": "Wissen ist Macht.",
+    "en": "Knowledge is power.",
+    "ru": "Знания - это электричество.",
+    "fr": "Le savoir est le pouvoir.",
+    "zh": "知识是力量。",
+    "ar": "-المعرفة هي القوة.",
+    "es": "El conocimiento es de poder."
+  },
+  {
+    "zh": "练习完美 完美",
+    "ar": "-تُمارسينه بشكل مثالي .",
+    "en": "Practice makes perfect.",
+    "ru": "Потренировка идеальна.",
+    "fr": "Pratiquez-vous.",
+    "de": "Übung macht perfekt.",
+    "es": "Practicar hace que sea perfecto."
+  },
+  {
+    "fr": "Le temps passe quand vous êtes amusant.",
+    "ar": "الوقت الذي تسافر فيه هو وقت وجودك",
+    "en": "Time flies when you are having fun.",
+    "es": "El tiempo vuela cuando te diviertes.",
+    "zh": "时间是什么时候,你玩得开心",
+    "ru": "Время для мух, когда у вас есть веселье.",
+    "de": "Zeit ist, wenn Sie Spaß haben."
+  },
+  {
+    "ru": "У каждого есть серебряная подкладка.",
+    "de": "Jede Wolke hat ein Silberfutter.",
+    "zh": "云彩里都有银色的",
+    "ar": "-كل شيء لديه هو",
+    "fr": "Chaque nuage a une doublure en argent.",
+    "en": "Every cloud has a silver lining.",
+    "es": "Cada nube tiene un forro plateado."
+  },
+  {
+    "zh": "动作比词大声",
+    "de": "Action spricht lauter als Worte.",
+    "en": "Actions speak louder than words.",
+    "es": "Acciones hablan más fuerte que palabras.",
+    "ar": "-أكد لكِ ما هو أفضل منه",
+    "ru": "Поступки говорят громче слов.",
+    "fr": "Les actions parlent fort que les mots."
+  },
+  {
+    "en": "The early bird catches the worm.",
+    "de": "Die Vogelfrühlinge fangen den Wurm.",
+    "fr": "Le petit oiseau a pris le ver.",
+    "ru": "Ранний червь ловит птицу.",
+    "es": "El pájaro temprano atrapa el gusano.",
+    "ar": "-الطائرة التي تُدعى \"الطائرة \".",
+    "zh": "早点接上鸟儿的鱼"
+  },
+  {
+    "ru": "Искусство - это смена мира.",
+    "en": "Artificial intelligence is changing the world.",
+    "de": "Künstliche Intelligenz ist die Welt verändern.",
+    "fr": "L'intelligence artificielle est le monde qui change.",
+    "es": "Artificial inteligencia es cambiar el mundo.",
+    "ar": "-هذا ما يحدث في العالم",
+    "zh": "艺术是智慧改变世界"
+  },
+  {
+    "ru": "Машина учится большим наборам данных.",
+    "zh": "机器需要大量数据",
+    "de": "Die Maschine braucht große Daten.",
+    "es": "La máquina requiere grandes datos.",
+    "ar": "ما يتطلبه الأمر هو بيانات كبيرة",
+    "fr": "La machine a besoin de données.",
+    "en": "Machine learning requires large datasets."
+  },
+  {
+    "en": "The algorithm needs optimization.",
+    "de": "Der Algorithmus braucht Optimierung.",
+    "ru": "Алгоритм нужен оптимизатор.",
+    "ar": "-الحاجات التي تحتاجها",
+    "fr": "L'algorithme a besoin d'optimisation.",
+    "es": "El algoritmo necesita optimización.",
+    "zh": "算法需要优化"
+  },
+  {
+    "fr": "Les données sont très importantes.",
+    "es": "Data es muy importante.",
+    "de": "Daten sind sehr wichtig.",
+    "en": "Data privacy is very important.",
+    "ru": "Данные очень важны.",
+    "ar": "-البيانات هي ما هو مهم جداً",
+    "zh": "数据是隐私的非常重要"
+  },
+  {
+    "es": "La nube reduce los costos de infraestructura.",
+    "fr": "Le Cloud réduit les coûts d'infrastructure.",
+    "en": "Cloud computing reduces infrastructure costs.",
+    "de": "Cloud-Rechnungswesen reduziert die Kosten.",
+    "ar": "-مُحدّدٌ للتكلفة الأساسية .",
+    "ru": "Клубная инфраструктура снижает стоимость.",
+    "zh": "云计算成本降低基础设施成本。"
+  },
+  {
+    "de": "Open-Software- Alle profitieren.",
+    "es": "Abrir el software de los beneficios de todos.",
+    "zh": "开放软件源 每个人的收益。",
+    "ar": "منبع البرمجيات هو كل شيء",
+    "en": "Open source software benefits everyone.",
+    "fr": "Ouvrez le logiciel.",
+    "ru": "Открыть программу для всех."
+  },
+  {
+    "ar": "-الخطر الأمني هو ما يزيد",
+    "zh": "网络安全威胁增加",
+    "fr": "Cybersécurité est en augmentation.",
+    "de": "Cybersicherheit ist immer größer.",
+    "es": "Cyberseguridad es amenaza creciente.",
+    "en": "Cybersecurity threats are increasing.",
+    "ru": "Кибербезопасность - это все больше и больше."
+  },
+  {
+    "ru": "Блок обеспечивает прозрачность.",
+    "de": "Blockchain sorgt für Transparenz.",
+    "es": "Bloquea la tecnología y asegura la transparencia.",
+    "ar": "-التقنية هي التي تضمن الشفافية",
+    "fr": "La technologie de bloc assure la transparence.",
+    "en": "Blockchain technology ensures transparency.",
+    "zh": "链锁技术保证透明"
+  },
+  {
+    "ar": "-ما هي المقدار الذي ستحدده؟",
+    "en": "Quantum computing will revolutionize science.",
+    "ru": "Квинтэум вычисляет революцию.",
+    "es": "Quantum computará la revolución.",
+    "zh": "电脑会自动转换",
+    "de": "Quantum Computing wird die Wissenschaft revolutionieren.",
+    "fr": "Quantum, ça va changer la science."
+  },
+  {
+    "ar": "-الإنترنت يوصل الناس إلى المُجاري .",
+    "fr": "L'internet relie des milliards de personnes.",
+    "es": "El Internet conecta miles de millones de personas.",
+    "en": "The internet connects billions of people.",
+    "ru": "Интернет соединяет миллиарды людей.",
+    "de": "Die Internetverbindung ist Milliarden von Leuten.",
+    "zh": "互联网连接数十亿人口"
+  },
+  {
+    "de": "Bitte schnell Ihren Sitzplatz.",
+    "fr": "S'il vous plaît, faites vite votre ceinture.",
+    "es": "Por favor, rápido, tu asiento.",
+    "en": "Please fasten your seatbelt.",
+    "ru": "Пожалуйста, быстро сидите на кресле.",
+    "zh": "请坐快座",
+    "ar": "من فضلك، من فضلك، من فضلك، من فضلك، من فضلك، من فضلك، من فضلك، من فضلك، من فضلك، من."
+  },
+  {
+    "ru": "Полет был отложен.",
+    "de": "Der Flug hat sich verzögert.",
+    "fr": "Le vol a été retardé.",
+    "en": "The flight has been delayed.",
+    "es": "El vuelo se retrasó.",
+    "zh": "飞行时间被延误了",
+    "ar": "الطيران كان مؤجلاً"
+  },
+  {
+    "ar": "المجلس يبدأ في الـ 30",
+    "ru": "На доске начинается тридцать минут.",
+    "fr": "Le conseil commence à prendre trente minutes.",
+    "es": "La junta comienza en treinta minutos.",
+    "de": "Board beginnt in dreißig Minuten.",
+    "en": "Boarding begins in thirty minutes.",
+    "zh": "董事会开始在三十分钟内"
+  },
+  {
+    "en": "I need to change my reservation.",
+    "zh": "我订位时需要换位子",
+    "de": "Ich brauche meine Reservierung ändern.",
+    "fr": "J'ai besoin de changer ma réservation.",
+    "ru": "Мне нужно сменить столик.",
+    "es": "Necesito cambiar mi reserva.",
+    "ar": "أنا بحاجة إلى تغيير تحفظي."
+  },
+  {
+    "fr": "Où est le portail des douze ?",
+    "es": "¿Dónde está el número doce?",
+    "de": "Wo ist die Nummer zwölf?",
+    "ar": "أين هو عدد من الـ 12؟",
+    "ru": "Где же номер 12?",
+    "zh": "门门是12号?",
+    "en": "Where is gate number twelve?"
+  },
+  {
+    "en": "The train departs at six fifteen.",
+    "ar": "الـ \"قطار\" الـ \"6\"",
+    "es": "El tren sale en el tren de los seis.",
+    "ru": "Тренировка отходит в 15.",
+    "fr": "Le train de pièces à six.",
+    "zh": "火车离开时,六点半",
+    "de": "Die Ausbildung fährt auf sechs."
+  },
+  {
+    "en": "Is this seat taken?",
+    "de": "Ich habe diesen Sitzplatz genommen?",
+    "ar": "هل هذا المكان محجوز؟",
+    "ru": "Это место взято?",
+    "zh": "座位坐在这里吗?",
+    "fr": "Je prends ce siège ?",
+    "es": "¿Me llevo este asiento?"
+  },
+  {
+    "de": "Wie lange dauert die Reise?",
+    "fr": "Comment ça se passe depuis longtemps ?",
+    "zh": "长途旅行是怎么样的?",
+    "ar": "كيف تكون الرحلة طويلة؟",
+    "ru": "Как долго мы путешествуем?",
+    "es": "¿Cómo es que el viaje largo es?",
+    "en": "How long is the journey?"
+  },
+  {
+    "es": "Me perdí mi conexión.",
+    "ar": "أنا أفتقد اتصالي",
+    "fr": "J'ai raté mon lien.",
+    "de": "Ich habe meine Verbindung verpasst.",
+    "ru": "Я пропустила мою связь.",
+    "zh": "我错过了连接。",
+    "en": "I missed my connection."
+  },
+  {
+    "fr": "Le bus est à côté du coin.",
+    "ar": "الحافله هي القافله",
+    "de": "Der Bus ist um die Ecke herum.",
+    "ru": "Автобус остановит поворот.",
+    "en": "The bus stop is around the corner.",
+    "es": "El autobús se detiene en la esquina.",
+    "zh": "公交车停靠是绕街转弯"
+  },
+  {
+    "en": "Water is essential for life.",
+    "es": "Agua es esencial para la vida.",
+    "fr": "L'eau est essentielle pour la vie.",
+    "ru": "Вода - это важная вещь для жизни.",
+    "zh": "水是生命的基本条件",
+    "de": "Wasser ist wichtig fürs Leben.",
+    "ar": "الماء هو ضروري للحياة"
+  },
+  {
+    "es": "El cambio climático afecta a todos.",
+    "zh": "气候改变影响每个人。",
+    "ar": "تغير المناخ يؤثر على كل شيء",
+    "fr": "Le changement climatique affecte tout le monde.",
+    "de": "Das Klima verändert sich.",
+    "en": "Climate change affects everyone.",
+    "ru": "Климат влияет на всех."
+  },
+  {
+    "ru": "Возобновляемая энергия - это будущее.",
+    "es": "Energía renovable es el futuro.",
+    "de": "Erneuerbare Energie ist die Zukunft.",
+    "ar": "الطاقة هي الطاقة التي تُستَدِنُ المستقبل",
+    "zh": "可再生能源是未来的能源",
+    "fr": "L'énergie renouvelable est le futur.",
+    "en": "Renewable energy is the future."
+  },
+  {
+    "zh": "我们必须保护环境",
+    "ar": "نحن يجب أن نحمي البيئة",
+    "es": "Debemos proteger el ambiente.",
+    "de": "Wir müssen die Umgebung schützen.",
+    "ru": "Мы должны защищать окружающую среду.",
+    "en": "We must protect the environment.",
+    "fr": "On doit protéger l'environnement."
+  },
+  {
+    "ar": "-التنوع الحيوي هو أن تكون الأنظمة البيئية",
+    "fr": "La biodiversité est cruciale pour les écosystèmes.",
+    "de": "Biodiversität ist entscheidend für Ökosysteme.",
+    "ru": "Биоразнообразие - это важнейшая экосистема.",
+    "en": "Biodiversity is crucial for ecosystems.",
+    "es": "Biodiversidad es crucial para los ecosistemas.",
+    "zh": "生物多样性是关键生态系统。"
+  },
+  {
+    "zh": "污染损害人体健康。",
+    "de": "Umweltschäden, Gesundheit.",
+    "ru": "Загрязнение окружающей среды.",
+    "ar": "-التلوث البشريّ هو ما يُسببه من أضرار صحية .",
+    "en": "Pollution damages human health.",
+    "fr": "La pollution est un dommage pour la santé.",
+    "es": "La contaminación de daños humanos."
+  },
+  {
+    "es": "Reciclaje ayuda a reducir los desperdicios.",
+    "ru": "Утилизация помогает уменьшить потери.",
+    "en": "Recycling helps reduce waste.",
+    "de": "Recycling hilft, Verschwendung zu reduzieren.",
+    "fr": "Recyclage aide à réduire le gaspillage.",
+    "zh": "回收能减少浪费",
+    "ar": "-يُخفّض من حجمه ."
+  },
+  {
+    "ar": "-أحراج من أجل إنتاج الأكسجين",
+    "es": "Los bosques producen oxígeno para el planeta.",
+    "zh": "森林产生氧气 以换取地球",
+    "fr": "Les forêts produisent de l'oxygène pour la planète.",
+    "en": "Forests produce oxygen for the planet.",
+    "ru": "Леса производят кислород для планеты.",
+    "de": "Forest produziert Sauerstoff für den Planeten."
+  },
+  {
+    "ru": "Океан покрывает самую большую часть Земли.",
+    "fr": "L'océan couvre la terre.",
+    "es": "El océano cubre la mayoría de la Tierra.",
+    "ar": "المحيط يغطي معظم الأرض",
+    "zh": "海洋覆盖了地球最大部分的海洋",
+    "de": "Die Ozeane decken die meisten der Erde.",
+    "en": "The ocean covers most of the Earth."
+  },
+  {
+    "zh": "可持续的发展 未来世代的收益",
+    "ar": "التطوير المستقبلي للفوائد المستقبلية",
+    "de": "Nachhaltige Entwicklung profitiert von zukünftigen Generationen.",
+    "en": "Sustainable development benefits future generations.",
+    "ru": "Устойчивые разработки выгодны для будущих поколений.",
+    "fr": "Le développement durable est bénéfique pour les générations futures.",
+    "es": "Desarrollo sostenible de las generaciones futuras."
+  },
+  {
+    "zh": "教育门打开 机会。",
+    "fr": "L'éducation ouvre des portes à l'occasion.",
+    "ar": "التعليم يُفتح على أساس الفرص.",
+    "en": "Education opens doors to opportunity.",
+    "de": "Die Ausbildung öffnet sich zu einer Gelegenheit.",
+    "ru": "Образовательные двери открывают возможности.",
+    "es": "La educación abre puertas para la oportunidad."
+  },
+  {
+    "es": "Los niños merecen atención médica.",
+    "zh": "孩子们应该有健康保健质量",
+    "ru": "Дети заслуживают медицинского обслуживания.",
+    "fr": "Les enfants méritent des soins de santé.",
+    "ar": "يستحق الأطفال نوعية جيدة من الرعاية الصحية.",
+    "en": "Children deserve quality healthcare.",
+    "de": "Kinder verdienen Qualität."
+  },
+  {
+    "fr": "La liberté de parole est une bonne chose.",
+    "ar": "الحرية هي من حق الإنسان.",
+    "de": "Freiheit ist eine Sprache, die Menschen richtig macht.",
+    "es": "Libertad de hablar es un humano derecho.",
+    "en": "Freedom of speech is a human right.",
+    "ru": "Свобода речи - это человеческая речь, верно?",
+    "zh": "自由的言语是人性"
+  },
+  {
+    "ar": "-يتطلب منا أن نُشارك",
+    "es": "La democracia requiere participación activa.",
+    "de": "Demokratie erfordert aktive Teilnahme.",
+    "en": "Democracy requires active participation.",
+    "ru": "Демократия требует активного участия.",
+    "fr": "La démocratie exige une participation active.",
+    "zh": "民主主义需要参与"
+  },
+  {
+    "es": "La justicia debe ser igual para todos.",
+    "de": "Gerechtigkeit muss gleich sein für alle.",
+    "ru": "Правосудие должно быть равным для всех.",
+    "zh": "正义必须平等",
+    "fr": "Justice doit être égal pour tous.",
+    "ar": "يجب أن يكون العدل متساوياً لكل شيء",
+    "en": "Justice must be equal for all."
+  },
+  {
+    "es": "La pobreza sigue siendo un desafío mundial.",
+    "fr": "La pauvreté reste un défi mondial.",
+    "en": "Poverty remains a global challenge.",
+    "de": "Armut bleibt eine globale Herausforderung.",
+    "ru": "Бедность остается глобальным вызовом.",
+    "zh": "贫穷仍然是全球性的挑战。",
+    "ar": "-لا يزال هناك تحدّي حول العالم"
+  },
+  {
+    "es": "La innovación impulsa el crecimiento económico.",
+    "zh": "创新驱动器经济成长",
+    "en": "Innovation drives economic growth.",
+    "ru": "Инновации ведут экономический рост.",
+    "ar": "-الابتكار الاقتصادي -التطور الإقتصادي",
+    "de": "Innovation treibt das Wachstum an.",
+    "fr": "L'innovation est un moteur économique."
+  },
+  {
+    "en": "Cooperation is better than competition.",
+    "zh": "合作比竞争好",
+    "es": "La cooperación es mejor que la competencia.",
+    "ru": "Сотрудничество лучше, чем соревнование.",
+    "fr": "La coopération est meilleure que la compétition.",
+    "ar": "التعاون أفضل من المنافسة",
+    "de": "Kooperation ist besser als Konkurrenz."
+  },
+  {
+    "es": "La diversidad cultural enriquece a la sociedad.",
+    "zh": "文化多样性丰富了社会。",
+    "ar": "التنوع الثقافي يغني المجتمع.",
+    "fr": "La diversité culturelle enrichit la société.",
+    "ru": "Культурное разнообразие обогащает общество.",
+    "en": "Cultural diversity enriches society.",
+    "de": "Kulturelle Vielfalt bereichert die Gesellschaft."
+  },
+  {
+    "en": "History teaches us valuable lessons.",
+    "ar": "التاريخ يُحدثنا",
+    "fr": "L'histoire nous enseigne des leçons précieuses.",
+    "de": "Geschichte lehrt uns wertvolle Lektionen.",
+    "ru": "История учит нас ценным урокам.",
+    "es": "La historia nos enseña lecciones valiosas.",
+    "zh": "历史教我们宝贵的课程。"
+  },
+  {
+    "zh": "明星今晚是美丽的",
+    "es": "Las estrellas son hermosas esta noche.",
+    "ar": "النجوم هي التي هي التي هي في حالة جمال.",
+    "ru": "Звезды - это красивая ночь.",
+    "en": "The stars are beautiful tonight.",
+    "de": "Die Sterne sind heute Abend schön.",
+    "fr": "Les étoiles sont belles ce soir."
+  },
+  {
+    "en": "Spring is my favorite season.",
+    "fr": "Le printemps est ma saison préférée.",
+    "zh": "春天是我的最爱的季节",
+    "es": "Primavera es mi temporada favorita.",
+    "ar": "-الربيع هو ما يُعتبر مُسَحّبًا .",
+    "de": "Frühling ist meine Lieblingssaison.",
+    "ru": "Весенний сезон - это мой любимый сезон."
+  },
+  {
+    "es": "Las montañas están cubiertas con nieve.",
+    "de": "Die Berge sind bedeckt mit Schnee.",
+    "ru": "Горы покрыты снегом.",
+    "fr": "Les montagnes sont couvertes de neige.",
+    "zh": "山峰是覆盖雪雪。",
+    "ar": "الجبال تغطيها مع الثلوج",
+    "en": "The mountains are covered with snow."
+  },
+  {
+    "ar": "الـ تدفق إلى الـ / إلى الـ.",
+    "en": "The river flows to the sea.",
+    "ru": "Река течет в море.",
+    "fr": "La rivière coule à la mer.",
+    "es": "El río fluye al mar.",
+    "de": "Der Fluss fließt ins Meer.",
+    "zh": "河水流到海中"
+  },
+  {
+    "ar": "-الشمس تُطلّق مع الألوان .",
+    "zh": "太阳漆漆画 天空颜色。",
+    "en": "Sunset paints the sky with colors.",
+    "fr": "Le soleil peint le ciel avec les couleurs.",
+    "es": "Sunset pinta el cielo con colores.",
+    "ru": "Солнце раскрашивает небо с цветами.",
+    "de": "Sonnenuntergang malt den Himmel mit Farben."
+  },
+  {
+    "de": "Der Garten ist voller Blumen.",
+    "zh": "花园是花的满满的花朵",
+    "ar": "الحدقة هي كامل من أزهار.",
+    "ru": "Сад - это полный цвет.",
+    "en": "The garden is full of flowers.",
+    "es": "El jardín es el de las flores.",
+    "fr": "Le jardin est plein de fleurs."
+  },
+  {
+    "ru": "Пирс поёт утром.",
+    "es": "Bird canta en la mañana.",
+    "zh": "鸟儿在早晨唱着鸟儿的歌",
+    "ar": "-الطيران يغني في الصنف",
+    "fr": "Les oiseaux chantent le matin.",
+    "en": "Birds sing in the morning.",
+    "de": "Vögel singen in der Morgendämmerung."
+  },
+  {
+    "ru": "Лес - это тихий и спокойный.",
+    "fr": "La forêt est calme et paisible.",
+    "es": "El bosque es tranquilo y tranquilo.",
+    "zh": "森林是宁静的,和平的。",
+    "en": "The forest is quiet and peaceful.",
+    "ar": "الغابة هي الهدوء و الطمأنينة",
+    "de": "Der Wald ist ruhig und friedlich."
+  },
+  {
+    "en": "Rain brings life to the earth.",
+    "de": "Regen bringt Leben in die Erde.",
+    "ar": "يُجلب الحياة إلى الأرض",
+    "es": "Lluvia trae vida a la tierra.",
+    "ru": "Дождь приносит жизнь в Землю.",
+    "zh": "雨水带来生命 带来地球",
+    "fr": "La pluie apporte la vie à la terre."
+  },
+  {
+    "en": "The moon shines brightly tonight.",
+    "ar": "-الكنز يضيء",
+    "ru": "Луна светит светлую ночь.",
+    "de": "Der Mond scheint heute Abend hell.",
+    "es": "La luna brilla esta noche.",
+    "zh": "月亮明亮明亮的夜晚。",
+    "fr": "La lune brille ce soir."
+  }
+]
