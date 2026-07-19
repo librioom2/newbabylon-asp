@@ -54,7 +54,7 @@ graph TD
 
 ### Environment Configuration
 * **Execution Engine:** `Candle` (`candle-core` v0.8) + MarianMT (`Helsinki-NLP/opus-mt`)
-* **Hardware Profile:** macOS (Apple Silicon), **100% CPU-only execution**
+* **Hardware Profile:** macOS (Apple Intel9), **100% CPU-only execution**
 * **Dataset:** `phrases_100.json` (100 production-grade multi-domain phrases)
 * **Telemetry Output:** Logged directly into `translations_output.json`
 
