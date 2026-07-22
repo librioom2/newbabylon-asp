@@ -1,5 +1,14 @@
 # 🏛 New Babylon — Aetheris Semantic Protocol (ASP)
 
+<p align="center">
+  <a href="https://www.buymeacoffee.com" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="160">
+  </a>
+  <a href="https://github.com/sponsors/librioom2" target="_blank">
+    <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=github-sponsors&logoColor=ea4aaa" alt="GitHub Sponsors" height="40">
+  </a>
+</p>
+
 **Aetheris Semantic Protocol (ASP)** is a cutting-edge, AI-powered networking protocol designed for instantaneous, secure, and cross-lingual knowledge transfer across international teams.
 
 Unlike traditional translation tools or cloud services that transmit raw text or audio, ASP encodes information directly into **latent state vectors (semantic embeddings)**. The network does not carry natural language — it transmits **pure meaning**. 
