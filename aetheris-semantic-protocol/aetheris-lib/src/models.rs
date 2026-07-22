@@ -119,22 +119,32 @@ impl Downloader {
         Ok(())
     }
 
-    /// Вспомогательный метод для загрузки всех моделей по умолчанию
+    /// Helper method to download all default team encoders and decoders
     pub fn fetch_all() -> anyhow::Result<()> {
-        // If you want to use sed2sed models, uncomment the line below and comment out the Marian calls.
-        // Self::fetch_sed2sed_all()?;
-        // базовые модели, уже имели токенизаторы в onnx-community
+        // Encoded models (Source Language -> English Pivot Space)
+        Self::download_model("Helsinki-NLP/opus-mt-ru-en", "encoders/marian-ru-en")?;
+        Self::download_model("Helsinki-NLP/opus-mt-de-en", "encoders/marian-de-en")?;
+        Self::download_model("Helsinki-NLP/opus-mt-fr-en", "encoders/marian-fr-en")?;
+        Self::download_model("Helsinki-NLP/opus-mt-es-en", "encoders/marian-es-en")?;
+        Self::download_model("Helsinki-NLP/opus-mt-zh-en", "encoders/marian-zh-en")?;
+        Self::download_model("Helsinki-NLP/opus-mt-ar-en", "encoders/marian-ar-en")?;
+
+        // Decoded models (English Pivot Space -> Target Language)
+        Self::download_model("Helsinki-NLP/opus-mt-en-ru", "decoders/marian-en-ru")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-de", "decoders/marian-en-de")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-fr", "decoders/marian-en-fr")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-es", "decoders/marian-en-es")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-zh", "decoders/marian-en-zh")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-ar", "decoders/marian-en-ar")?;
+
+        // Legacy compatibility aliases
         Self::download_model("Helsinki-NLP/opus-mt-en-ru", "marian-en-ru")?;
         Self::download_model("Helsinki-NLP/opus-mt-ru-en", "marian-ru-en")?;
-        // новые требуемые языки
-        Self::download_model("Helsinki-NLP/opus-mt-en-de", "marian-en-de")?; // German
-        Self::download_model("Helsinki-NLP/opus-mt-en-fr", "marian-en-fr")?; // French
-        Self::download_model("Helsinki-NLP/opus-mt-en-es", "marian-en-es")?; // Spanish
-        Self::download_model("Helsinki-NLP/opus-mt-en-zh", "marian-en-zh")?; // Chinese
-        Self::download_model("Helsinki-NLP/opus-mt-en-ar", "marian-en-ar")?; // Arabic
-        Self::download_model("Helsinki-NLP/opus-mt-en-uk", "marian-en-uk")?; // Ukrainian (fallback conversion will run)
-        Self::download_model("Helsinki-NLP/opus-mt-en-ja", "marian-en-ja")?; // Japanese (fallback conversion)
-        Self::download_model("Helsinki-NLP/opus-mt-en-ko", "marian-en-ko")?; // Korean (fallback conversion)
+        Self::download_model("Helsinki-NLP/opus-mt-en-de", "marian-en-de")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-fr", "marian-en-fr")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-es", "marian-en-es")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-zh", "marian-en-zh")?;
+        Self::download_model("Helsinki-NLP/opus-mt-en-ar", "marian-en-ar")?;
         Ok(())
     }
 }
