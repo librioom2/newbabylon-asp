@@ -34,9 +34,14 @@ impl SemanticEngine {
             .map_err(|e| anyhow!("Failed to load tokenizer {:?}: {}", tokenizer_path, e))?;
 
         // Загружаем веса модели через VarBuilder
-        let weights_path = model_dir.join("model.safetensors");
-        let vb = unsafe {
-            VarBuilder::from_mmaped_safetensors(&[weights_path], candle_core::DType::F32, &device)?
+        let safetensors_path = model_dir.join("model.safetensors");
+        let bin_path = model_dir.join("pytorch_model.bin");
+        let vb = if safetensors_path.exists() {
+            unsafe { VarBuilder::from_mmaped_safetensors(&[safetensors_path], candle_core::DType::F32, &device)? }
+        } else if bin_path.exists() {
+            VarBuilder::from_pth(&bin_path, candle_core::DType::F32, &device)?
+        } else {
+            return Err(anyhow!("Neither model.safetensors nor pytorch_model.bin found in {:?}", model_dir));
         };
 
         // Инициализируем модель
@@ -91,9 +96,14 @@ impl DecoderEngine {
             .map_err(|e| anyhow!("Failed to load tokenizer {:?}: {}", tokenizer_path, e))?;
 
         // Загружаем веса модели через VarBuilder
-        let weights_path = model_dir.join("model.safetensors");
-        let vb = unsafe {
-            VarBuilder::from_mmaped_safetensors(&[weights_path], candle_core::DType::F32, &device)?
+        let safetensors_path = model_dir.join("model.safetensors");
+        let bin_path = model_dir.join("pytorch_model.bin");
+        let vb = if safetensors_path.exists() {
+            unsafe { VarBuilder::from_mmaped_safetensors(&[safetensors_path], candle_core::DType::F32, &device)? }
+        } else if bin_path.exists() {
+            VarBuilder::from_pth(&bin_path, candle_core::DType::F32, &device)?
+        } else {
+            return Err(anyhow!("Neither model.safetensors nor pytorch_model.bin found in {:?}", model_dir));
         };
 
         // Инициализируем модель

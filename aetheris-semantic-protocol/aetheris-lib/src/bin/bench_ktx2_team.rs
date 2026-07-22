@@ -1,7 +1,7 @@
 // bench_ktx2_team.rs — EN-Pivot Team Benchmark with KTX2 RGBA Texture & Zstd Compression
 use anyhow::{anyhow, Result};
 use aetheris_lib::ai::{SemanticEngine, DecoderEngine, DessModule};
-use aetheris_lib::texture::{bake_and_compress_vector, decompress_and_unpack_vector};
+use aetheris_lib::texture::{bake_and_compress_int8_vector, decompress_and_unpack_int8_vector};
 use std::path::{Path, PathBuf};
 use std::time::Instant;
 
@@ -63,7 +63,7 @@ fn main() -> Result<()> {
 
         // 3. Bake KTX2 + Zstd + BLAKE3
         let t_bake_start = Instant::now();
-        let baked = bake_and_compress_vector(&vector, seq_len, d_model, 3)?;
+        let baked = bake_and_compress_int8_vector(&vector, seq_len, d_model, 3)?;
         bake_times.push(t_bake_start.elapsed());
 
         total_raw_bytes += raw_f32_bytes;
@@ -90,7 +90,7 @@ fn main() -> Result<()> {
 
         // 5. Member C: Decompress Zstd -> Unpack KTX2 -> Unshuffle DESS -> Decode
         let t_unpack_start = Instant::now();
-        let (mut restored_vector, r_seq, r_dim) = decompress_and_unpack_vector(&compressed_payload)?;
+        let (mut restored_vector, r_seq, r_dim) = decompress_and_unpack_int8_vector(&compressed_payload, baked.quant_scale, baked.quant_min)?;
         unpack_times.push(t_unpack_start.elapsed());
 
         dess.unshuffle(&mut restored_vector);

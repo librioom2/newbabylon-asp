@@ -147,6 +147,8 @@ fn main() -> Result<()> {
                 hidden_dimension: d_model as u32,
                 embedding_data: Some(emb_offset),
                 language_hint: Some(lang_offset),
+                quant_scale: 0.0,
+                quant_min: 0.0,
                 timestamp: 0,
             }
         );

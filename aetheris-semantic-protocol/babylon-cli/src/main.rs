@@ -142,17 +142,19 @@ async fn main() -> anyhow::Result<()> {
                             let dess = DessModule::new(seed);
                             dess.unshuffle(&mut vector);
                             
-                            let model_dir = if lang_hint == "ru" {
-                                "models/marian-en-ru"
+                            let model_dir_str = format!("models/decoders/marian-en-{}", lang_hint);
+                            let alt_dir_str = format!("models/marian-en-{}", lang_hint);
+                            let model_dir = if Path::new(&model_dir_str).exists() {
+                                PathBuf::from(model_dir_str)
                             } else {
-                                "models/marian-ru-en"
+                                PathBuf::from(alt_dir_str)
                             };
                             
                             let decoder = if let Some(d) = decoders.get_mut(lang_hint) {
                                 d
                             } else {
                                 println!("🧠 Lazy loading decoder for language {} ({:?})...", lang_hint, model_dir);
-                                match DecoderEngine::new(Path::new(model_dir)) {
+                                match DecoderEngine::new(&model_dir) {
                                     Ok(d) => {
                                         decoders.insert(lang_hint.to_string(), d);
                                         decoders.get_mut(lang_hint).unwrap()
@@ -183,13 +185,16 @@ async fn main() -> anyhow::Result<()> {
         }
 
         Commands::Connect { addr, text, lang, seed } => {
-            let model_dir = if lang == "ru" {
-                "models/marian-en-ru"
+            let enc_dir_str = format!("models/encoders/marian-{}-en", lang);
+            let alt_enc_str = format!("models/marian-{}-en", lang);
+            let model_path = if Path::new(&enc_dir_str).exists() {
+                PathBuf::from(enc_dir_str)
+            } else if Path::new(&alt_enc_str).exists() {
+                PathBuf::from(alt_enc_str)
             } else {
-                "models/marian-ru-en"
+                PathBuf::from(format!("models/encoders/marian-{}-en", lang))
             };
             
-            let model_path = PathBuf::from(model_dir);
             if !model_path.exists() {
                 eprintln!("❌ Model path {:?} not found. Please run `babylon init` first.", model_path);
                 return Ok(());
