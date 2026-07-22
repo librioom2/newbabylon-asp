@@ -215,6 +215,16 @@ cargo build --release -p babylon
 
 ---
 
+## 💖 Backers & Sponsors
+
+ASP is an open-source project supported by our community.
+
+[![Sponsors](https://img.shields.io/badge/Become_a_Sponsor-ea4aaa?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/librioom2)
+
+Check out our [SUPPORTERS.md](aetheris-semantic-protocol/SUPPORTERS.md) file for the full list of community backers.
+
+---
+
 ## 🔒 Licensing
 
 * Core Library (`aetheris-lib`): [Apache-2.0](https://apache.org).
