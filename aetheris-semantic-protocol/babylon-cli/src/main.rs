@@ -1,12 +1,13 @@
 use clap::{Parser, Subcommand};
 use aetheris_lib::models::Downloader;
 use aetheris_lib::ai::{SemanticEngine, DecoderEngine, DessModule};
+use aetheris_lib::texture::{bake_and_compress_int8_vector, decompress_and_unpack_int8_vector};
 use std::path::{Path, PathBuf};
 use std::net::UdpSocket;
 use aetheris_lib::proto::root_as_semantic_packet;
 
 #[derive(Parser)]
-#[command(name = "babylon", about = "Aetheris Semantic Protocol CLI")]
+#[command(name = "babylon", about = "Aetheris Semantic Protocol (ASP) CLI")]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
@@ -14,29 +15,27 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Инициализация ИИ-моделей (MarianMT en-ru и ru-en)
+    /// Initialize MarianMT models
     Init,
-    /// Локальный тест: Текст -> Вектор -> Декодирование
+    /// Local translation test: Text -> Vector -> Decode
     Translate { 
         text: String, 
-        /// Языковое направление: "en-ru" или "ru-en"
         #[arg(short, long, default_value = "en-ru")]
         direction: String,
         #[arg(short, long, default_value_t = 1337)]
         seed: u64 
     },
-    /// Сервер: Прием семантических векторов, дешифровка и локальный перевод
+    /// Server node: Receive INT8 KTX2 Zstd semantic packets, unshuffle DESS & decode
     Listen { 
         #[arg(short, long, default_value = "127.0.0.1:4433")]
         addr: String,
     },
-    /// Клиент: Отправка смысла на удаленный узел
+    /// Client node: Quantize INT8 + Bake KTX2 + Zstd Compress + DESS Shuffle & Send
     Connect { 
         #[arg(short, long)]
         addr: String,
         #[arg(short, long)]
         text: String,
-        /// Язык получателя: "ru" или "en"
         #[arg(short, long, default_value = "ru")]
         lang: String,
         #[arg(short, long, default_value_t = 1337)]
@@ -50,47 +49,47 @@ async fn main() -> anyhow::Result<()> {
 
     match cli.command {
         Commands::Init => {
-            println!("🏗️  Загрузка моделей MarianMT из Hugging Face...");
+            println!("🏗️  Downloading MarianMT models from Hugging Face...");
             match Downloader::fetch_all() {
-                Ok(_) => println!("🚀 Модели успешно загружены и готовы к работе."),
-                Err(e) => eprintln!("❌ Ошибка загрузки моделей: {}", e),
+                Ok(_) => println!("🚀 Models successfully downloaded and ready."),
+                Err(e) => eprintln!("❌ Model download failed: {}", e),
             }
         }
 
         Commands::Translate { text, direction, seed } => {
             let model_path = PathBuf::from(format!("models/marian-{}", direction));
             if !model_path.exists() {
-                eprintln!("❌ Модель не найдена по пути {:?}. Пожалуйста, запустите `init` сначала.", model_path);
+                eprintln!("❌ Model directory {:?} not found. Please run `babylon init` first.", model_path);
                 return Ok(());
             }
             
             let start_load = std::time::Instant::now();
             let mut encoder = SemanticEngine::load(&model_path)?;
             let mut decoder = DecoderEngine::new(&model_path)?;
-            println!("🧠 Модели загружены за {:?}", start_load.elapsed());
+            println!("🧠 Models loaded in {:?}", start_load.elapsed());
             
-            println!("🛰️  Кодирование: '{}'", text);
+            println!("🛰️  Encoding text: '{}'", text);
             let start_encode = std::time::Instant::now();
             let (vector, seq_len, d_model) = encoder.encode(&text)?;
-            println!("📊 Векторы скрытых состояний: {} токенов x {} дим. Кодирование: {:?}", seq_len, d_model, start_encode.elapsed());
+            println!("📊 Hidden states: {} tokens x {} dim. Encoding time: {:?}", seq_len, d_model, start_encode.elapsed());
             
-            println!("🔐 Применение DESS (Seed: {})", seed);
+            println!("🔐 Applying DESS Shuffle (Seed: {})", seed);
             let mut shuffled = vector.clone();
             let dess = DessModule::new(seed);
             dess.shuffle(&mut shuffled);
             
-            println!("🔓 Дешифрование DESS");
+            println!("🔓 Unshuffling DESS");
             dess.unshuffle(&mut shuffled);
             
-            println!("💬 Декодирование смысла...");
+            println!("💬 Decoding semantic vector...");
             let start_decode = std::time::Instant::now();
             let translation = decoder.decode(&shuffled, seq_len, d_model)?;
-            println!("⚡ Время декодирования: {:?}", start_decode.elapsed());
-            println!("👉 Результат: '{}'", translation);
+            println!("⚡ Decoding time: {:?}", start_decode.elapsed());
+            println!("👉 Translation: '{}'", translation);
         }
 
         Commands::Listen { addr } => {
-            println!("📡 Сервер New Babylon запущен на {}", addr);
+            println!("📡 Aetheris Semantic Protocol (ASP) Server running on UDP {}", addr);
             let socket = UdpSocket::bind(&addr)?;
             let mut buf = [0u8; 65535];
             
@@ -99,7 +98,8 @@ async fn main() -> anyhow::Result<()> {
             loop {
                 match socket.recv_from(&mut buf) {
                     Ok((size, src)) => {
-                        println!("📡 Получен пакет ({} байт) от {}", size, src);
+                        let receive_time = std::time::Instant::now();
+                        println!("📡 [UDP RECEIVE] Packet size: {} bytes from {}", size, src);
                         
                         let packet = match root_as_semantic_packet(&buf[..size]) {
                             Ok(p) => p,
@@ -113,14 +113,32 @@ async fn main() -> anyhow::Result<()> {
                         let seq_len = packet.sequence_length() as usize;
                         let d_model = packet.hidden_dimension() as usize;
                         let lang_hint = packet.language_hint().unwrap_or("ru");
+                        let quant_scale = packet.quant_scale();
+                        let quant_min = packet.quant_min();
+
+                        let (scale, min_val) = if quant_scale != 0.0 {
+                            (quant_scale, quant_min)
+                        } else {
+                            (0.02, -2.5)
+                        };
                         
                         if let Some(data) = packet.embedding_data() {
-                            let bytes = data.bytes();
-                            let mut vector: Vec<f32> = bytes
-                                .chunks_exact(4)
-                                .map(|chunk| f32::from_le_bytes(chunk.try_into().unwrap()))
-                                .collect();
-                                
+                            let compressed_payload = data.bytes();
+                            
+                            // 1. Zstd Decompress + KTX2 RGBA Unpack + INT8 De-quantize
+                            let (mut vector, r_seq, r_dim) = match decompress_and_unpack_int8_vector(compressed_payload, scale, min_val) {
+                                Ok(res) => res,
+                                Err(_) => {
+                                    // Raw float fallback if raw packet
+                                    let floats: Vec<f32> = compressed_payload
+                                        .chunks_exact(4)
+                                        .map(|c| f32::from_le_bytes(c.try_into().unwrap()))
+                                        .collect();
+                                    (floats, seq_len, d_model)
+                                }
+                            };
+                            
+                            // 2. DESS Unshuffle
                             let dess = DessModule::new(seed);
                             dess.unshuffle(&mut vector);
                             
@@ -133,30 +151,33 @@ async fn main() -> anyhow::Result<()> {
                             let decoder = if let Some(d) = decoders.get_mut(lang_hint) {
                                 d
                             } else {
-                                println!("🧠 Ленивая загрузка декодера для {} ({:?})...", lang_hint, model_dir);
+                                println!("🧠 Lazy loading decoder for language {} ({:?})...", lang_hint, model_dir);
                                 match DecoderEngine::new(Path::new(model_dir)) {
                                     Ok(d) => {
                                         decoders.insert(lang_hint.to_string(), d);
                                         decoders.get_mut(lang_hint).unwrap()
                                     }
                                     Err(e) => {
-                                        eprintln!("❌ Не удалось загрузить декодер: {}", e);
+                                        eprintln!("❌ Failed to load decoder: {}", e);
                                         continue;
                                     }
                                 }
                             };
                             
-                            match decoder.decode(&vector, seq_len, d_model) {
+                            let start_decode = std::time::Instant::now();
+                            match decoder.decode(&vector, r_seq, r_dim) {
                                 Ok(text) => {
-                                    println!("👉 [СМЫСЛ РАСШИФРОВАН] ({}) от {}: '{}'", lang_hint, src, text);
+                                    let total_latency = receive_time.elapsed();
+                                    println!("👉 [DECODED SEMANTIC TEXT] ({}) from {}: '{}' (Decode: {:?}, E2E Latency: {:?})",
+                                        lang_hint, src, text, start_decode.elapsed(), total_latency);
                                 }
                                 Err(e) => {
-                                    eprintln!("❌ Ошибка декодирования: {}", e);
+                                    eprintln!("❌ Decoding error: {}", e);
                                 }
                             }
                         }
                     }
-                    Err(e) => eprintln!("❌ Ошибка сокета: {}", e),
+                    Err(e) => eprintln!("❌ Socket error: {}", e),
                 }
             }
         }
@@ -170,23 +191,32 @@ async fn main() -> anyhow::Result<()> {
             
             let model_path = PathBuf::from(model_dir);
             if !model_path.exists() {
-                eprintln!("❌ Модель не найдена по пути {:?}. Пожалуйста, запустите `init` сначала.", model_path);
+                eprintln!("❌ Model path {:?} not found. Please run `babylon init` first.", model_path);
                 return Ok(());
             }
             
             let mut encoder = SemanticEngine::load(&model_path)?;
-            println!("🛰️  Кодирование смысла: '{}'", text);
+            println!("🛰️  Encoding text: '{}'", text);
+            let start_enc = std::time::Instant::now();
             let (mut vector, seq_len, d_model) = encoder.encode(&text)?;
+            let raw_fp32_bytes = vector.len() * 4;
             
-            println!("🔐 Шифрование DESS (Seed: {})", seed);
+            println!("🔐 Applying DESS Shuffle (Seed: {})", seed);
             let dess = DessModule::new(seed);
             dess.shuffle(&mut vector);
             
+            println!("📦 Baking INT8 KTX2 RGBA Texture & Zstd Compress...");
+            let start_bake = std::time::Instant::now();
+            let baked = bake_and_compress_int8_vector(&vector, seq_len, d_model, 3)?;
+            let hash_name = format!("{}.ktx2.zst", &baked.blake3_hash[..16]);
+            println!("   ✅ Baked Payload: {} (Compressed Size: {} B vs Raw FP32: {} B, {:.1}x reduction in {:?})",
+                hash_name, baked.compressed_byte_size, raw_fp32_bytes,
+                raw_fp32_bytes as f64 / baked.compressed_byte_size as f64,
+                start_bake.elapsed());
+            
             let mut builder = flatbuffers::FlatBufferBuilder::new();
             let language_hint_offset = builder.create_string(&lang);
-            
-            let byte_vector: Vec<u8> = vector.iter().flat_map(|&f| f.to_le_bytes().to_vec()).collect();
-            let embedding_data_offset = builder.create_vector(&byte_vector);
+            let embedding_data_offset = builder.create_vector(&baked.compressed_bytes);
             
             let packet = aetheris_lib::proto::SemanticPacket::create(
                 &mut builder,
@@ -194,10 +224,12 @@ async fn main() -> anyhow::Result<()> {
                     session_id: 0x42,
                     sequence_id: 1,
                     ghost_hash: seed,
-                    precision: aetheris_lib::proto::Precision::F32,
+                    precision: aetheris_lib::proto::Precision::INT8,
                     sequence_length: seq_len as u32,
                     hidden_dimension: d_model as u32,
                     embedding_data: Some(embedding_data_offset),
+                    quant_scale: baked.quant_scale,
+                    quant_min: baked.quant_min,
                     language_hint: Some(language_hint_offset),
                     timestamp: std::time::SystemTime::now()
                         .duration_since(std::time::UNIX_EPOCH)?
@@ -211,8 +243,10 @@ async fn main() -> anyhow::Result<()> {
             let socket = UdpSocket::bind("0.0.0.0:0")?;
             socket.send_to(finished_data, &addr)?;
             
-            println!("🚀 Пакет ASP ({} байт) отправлен на {}!", finished_data.len(), addr);
+            println!("🚀 ASP Packet ({}) (Total Wire Size: {} B) sent to {} (Total Encoding+Baking: {:?})!",
+                hash_name, finished_data.len(), addr, start_enc.elapsed());
         }
     }
     Ok(())
 }
+

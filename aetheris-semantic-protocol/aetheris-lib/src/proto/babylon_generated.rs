@@ -118,8 +118,10 @@ impl<'a> SemanticPacket<'a> {
   pub const VT_SEQUENCE_LENGTH: ::flatbuffers::VOffsetT = 12;
   pub const VT_HIDDEN_DIMENSION: ::flatbuffers::VOffsetT = 14;
   pub const VT_EMBEDDING_DATA: ::flatbuffers::VOffsetT = 16;
-  pub const VT_LANGUAGE_HINT: ::flatbuffers::VOffsetT = 18;
-  pub const VT_TIMESTAMP: ::flatbuffers::VOffsetT = 20;
+  pub const VT_QUANT_SCALE: ::flatbuffers::VOffsetT = 18;
+  pub const VT_QUANT_MIN: ::flatbuffers::VOffsetT = 20;
+  pub const VT_LANGUAGE_HINT: ::flatbuffers::VOffsetT = 22;
+  pub const VT_TIMESTAMP: ::flatbuffers::VOffsetT = 24;
 
   #[inline]
   pub unsafe fn init_from_table(table: ::flatbuffers::Table<'a>) -> Self {
@@ -135,6 +137,8 @@ impl<'a> SemanticPacket<'a> {
     builder.add_ghost_hash(args.ghost_hash);
     builder.add_session_id(args.session_id);
     if let Some(x) = args.language_hint { builder.add_language_hint(x); }
+    builder.add_quant_min(args.quant_min);
+    builder.add_quant_scale(args.quant_scale);
     if let Some(x) = args.embedding_data { builder.add_embedding_data(x); }
     builder.add_hidden_dimension(args.hidden_dimension);
     builder.add_sequence_length(args.sequence_length);
@@ -194,6 +198,20 @@ impl<'a> SemanticPacket<'a> {
     unsafe { self._tab.get::<::flatbuffers::ForwardsUOffset<::flatbuffers::Vector<'a, u8>>>(SemanticPacket::VT_EMBEDDING_DATA, None)}
   }
   #[inline]
+  pub fn quant_scale(&self) -> f32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<f32>(SemanticPacket::VT_QUANT_SCALE, Some(0.0)).unwrap()}
+  }
+  #[inline]
+  pub fn quant_min(&self) -> f32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<f32>(SemanticPacket::VT_QUANT_MIN, Some(0.0)).unwrap()}
+  }
+  #[inline]
   pub fn language_hint(&self) -> Option<&'a str> {
     // Safety:
     // Created from valid Table for this object
@@ -222,6 +240,8 @@ impl ::flatbuffers::Verifiable for SemanticPacket<'_> {
      .visit_field::<u32>("sequence_length", Self::VT_SEQUENCE_LENGTH, false)?
      .visit_field::<u32>("hidden_dimension", Self::VT_HIDDEN_DIMENSION, false)?
      .visit_field::<::flatbuffers::ForwardsUOffset<::flatbuffers::Vector<'_, u8>>>("embedding_data", Self::VT_EMBEDDING_DATA, false)?
+     .visit_field::<f32>("quant_scale", Self::VT_QUANT_SCALE, false)?
+     .visit_field::<f32>("quant_min", Self::VT_QUANT_MIN, false)?
      .visit_field::<::flatbuffers::ForwardsUOffset<&str>>("language_hint", Self::VT_LANGUAGE_HINT, false)?
      .visit_field::<u64>("timestamp", Self::VT_TIMESTAMP, false)?
      .finish();
@@ -236,6 +256,8 @@ pub struct SemanticPacketArgs<'a> {
     pub sequence_length: u32,
     pub hidden_dimension: u32,
     pub embedding_data: Option<::flatbuffers::WIPOffset<::flatbuffers::Vector<'a, u8>>>,
+    pub quant_scale: f32,
+    pub quant_min: f32,
     pub language_hint: Option<::flatbuffers::WIPOffset<&'a str>>,
     pub timestamp: u64,
 }
@@ -250,6 +272,8 @@ impl<'a> Default for SemanticPacketArgs<'a> {
       sequence_length: 0,
       hidden_dimension: 0,
       embedding_data: None,
+      quant_scale: 0.0,
+      quant_min: 0.0,
       language_hint: None,
       timestamp: 0,
     }
@@ -290,6 +314,14 @@ impl<'a: 'b, 'b, A: ::flatbuffers::Allocator + 'a> SemanticPacketBuilder<'a, 'b,
     self.fbb_.push_slot_always::<::flatbuffers::WIPOffset<_>>(SemanticPacket::VT_EMBEDDING_DATA, embedding_data);
   }
   #[inline]
+  pub fn add_quant_scale(&mut self, quant_scale: f32) {
+    self.fbb_.push_slot::<f32>(SemanticPacket::VT_QUANT_SCALE, quant_scale, 0.0);
+  }
+  #[inline]
+  pub fn add_quant_min(&mut self, quant_min: f32) {
+    self.fbb_.push_slot::<f32>(SemanticPacket::VT_QUANT_MIN, quant_min, 0.0);
+  }
+  #[inline]
   pub fn add_language_hint(&mut self, language_hint: ::flatbuffers::WIPOffset<&'b  str>) {
     self.fbb_.push_slot_always::<::flatbuffers::WIPOffset<_>>(SemanticPacket::VT_LANGUAGE_HINT, language_hint);
   }
@@ -322,6 +354,8 @@ impl ::core::fmt::Debug for SemanticPacket<'_> {
       ds.field("sequence_length", &self.sequence_length());
       ds.field("hidden_dimension", &self.hidden_dimension());
       ds.field("embedding_data", &self.embedding_data());
+      ds.field("quant_scale", &self.quant_scale());
+      ds.field("quant_min", &self.quant_min());
       ds.field("language_hint", &self.language_hint());
       ds.field("timestamp", &self.timestamp());
       ds.finish()

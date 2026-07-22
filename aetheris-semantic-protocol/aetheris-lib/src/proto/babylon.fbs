@@ -15,7 +15,10 @@ table SemanticPacket {
   // Это плоский массив размером L * D * sizeof(precision)
   embedding_data: [ubyte];    
   
-  language_hint: string;      // На какой язык декодировать (ru, en, ja)
+  quant_scale: float;         // INT8 quantization scale factor
+  quant_min: float;           // INT8 quantization minimum bound
+
+  language_hint: string;      // Target language hint (e.g. ru, en, de)
   timestamp: ulong;
 }
 
