@@ -1,8 +1,6 @@
 /target/
-/models/
 /layers_e5/
 /layers_phi/
-/*.bin
 /e5_tokens.txt
 /e5_tokens_clean.txt
 /phi_tokens.txt
