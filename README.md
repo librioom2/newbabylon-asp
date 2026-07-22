@@ -1,8 +1,8 @@
 # 🏛 New Babylon — Aetheris Semantic Protocol (ASP)
 
 <p align="center">
-  <a href="https://www.buymeacoffee.com" target="_blank">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="160">
+  <a href="https://ko-fi.com/librioom2" target="_blank">
+    <img src="https://storage.ko-fi.com/cdn/kofi3.png?v=3" alt="Support on Ko-fi" height="40">
   </a>
   <a href="https://github.com/sponsors/librioom2" target="_blank">
     <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=github-sponsors&logoColor=ea4aaa" alt="GitHub Sponsors" height="40">
